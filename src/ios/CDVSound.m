@@ -264,6 +264,8 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
 
             // Pass the AVPlayerItem to a new player
             avPlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+            // don't download whole file before playing
+            avPlayer.automaticallyWaitsToMinimizeStalling = false;
 
             //avPlayer = [[AVPlayer alloc] initWithURL:resourceUrl];
         }
