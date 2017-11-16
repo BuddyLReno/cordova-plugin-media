@@ -112,10 +112,8 @@ id="cordova-plugin-media"
             <string>$MICROPHONE_USAGE_DESCRIPTION</string>
         </config-file>
         <preference name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" default="NO" />
-        <preference name="AUTOMATICALLY_WAITS_TO_MINIMIZE_STALLING" default="true">
         <config-file target="config.xml" parent="/*">
           <preference name="KeepAVAudioSessionAlwaysActive" value="$KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" />
-          <preference name="AutomaticallyWaitsToMinimizeStalling" value="$AUTOMATICALLY_WAITS_TO_MINIMIZE_STALLING">
         </config-file>
     </platform>
 
