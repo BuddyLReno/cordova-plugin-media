@@ -35,6 +35,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
 {
   NSDictionary* settings = self.commandDelegate.settings;
   keepAvAudioSessionAlwaysActive = [[settings objectForKey:[@"KeepAVAudioSessionAlwaysActive" lowercaseString]] boolValue];
+  automaticallyWaitsToMinimizeStalling = [[settings objectForKey:[@"AutomaticallyWaitsToMinimizeStalling" lowercaseString]] boolValue];
   if (keepAvAudioSessionAlwaysActive) {
     if ([self hasAudioSession]) {
       NSError* error = nil;
@@ -267,7 +268,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
             // don't download whole file before playing
             NSArray *osVersion = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
             if ([[osVersion objectAtIndex:0] intValue] >= 10) {
-              avPlayer.automaticallyWaitsToMinimizeStalling = false;
+              avPlayer.automaticallyWaitsToMinimizeStalling = automaticallyWaitsToMinimizeStalling;
             }
 
             //avPlayer = [[AVPlayer alloc] initWithURL:resourceUrl];
