@@ -37,6 +37,8 @@ import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.os.Build;
+
 
 /**
  * This class implements the audio playback and recording capabilities used by Cordova.
@@ -730,4 +732,22 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
         }
         return 0;
     }
+
+    public void setRate(float speed) {
+    // Check for API 23+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      try {
+        if (this.player.isPlaying()) {
+          this.player.setPlaybackParams(this.player.getPlaybackParams().setSpeed(speed));
+        }
+        else {
+          this.player.setPlaybackParams(this.player.getPlaybackParams().setSpeed(speed));
+          this.player.pause();
+        }  
+      }
+      catch(Exception e) {
+          e.printStackTrace();
+      }
+    }
+  }
 }
