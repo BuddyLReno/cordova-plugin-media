@@ -325,11 +325,23 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
             audioFile.rate = rate;
             if (audioFile.player) {
                 audioFile.player.enableRate = YES;
-                audioFile.player.rate = [rate floatValue];
+                if (audioFile.player.isPlaying) {
+                    audioFile.player.rate = [rate floatValue];
+                }
+                else {
+                    audioFile.player.rate = [rate floatValue];
+                    [audioFile.player pause];
+                }
             }
             if (avPlayer.currentItem && avPlayer.currentItem.asset){
                 float customRate = [rate floatValue];
-                [avPlayer setRate:customRate];
+                if (avPlayer.rate != 0 && avPlayer.error == nil) {
+                    [avPlayer setRate:customRate];
+                }
+                else {
+                    [avPlayer setRate:customRate];
+                    [avPlayer pause];
+                }
             }
 
             [[self soundCache] setObject:audioFile forKey:mediaId];
