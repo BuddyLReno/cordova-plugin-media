@@ -733,21 +733,23 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
         return 0;
     }
 
+    /**
+     * Set the playback rate for the media
+     *
+     */
     public void setRate(float speed) {
-    // Check for API 23+
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      try {
-        if (this.player.isPlaying()) {
-          this.player.setPlaybackParams(this.player.getPlaybackParams().setSpeed(speed));
+        // Check for API 23+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            try {
+                boolean wasPlaying = this.player.isPlaying();
+                this.player.setPlaybackParams(this.player.getPlaybackParams().setSpeed(speed));
+                if (!wasPlaying && this.player.isPlaying()) {
+                    this.player.pause();
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
         }
-        else {
-          this.player.setPlaybackParams(this.player.getPlaybackParams().setSpeed(speed));
-          this.player.pause();
-        }  
-      }
-      catch(Exception e) {
-          e.printStackTrace();
-      }
     }
-  }
 }
